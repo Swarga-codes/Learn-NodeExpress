@@ -58,6 +58,15 @@ return res.status(404).send(result.error.details[0].message);
 genre.name=req.body.name;
 res.send(genre);
 });
+//DELETE Request
+app.delete("/api/genres/:id",(req,res)=>{
+//find the genre to be deleted
+const genre=genres.find(g=> g.id===parseInt(req.params.id));
+if(!genre) return res.status(404).send("The requested genre is not found");
+const ind=genres.indexOf(genre);
+genres.splice(ind,1);
+res.send(genre);
+});
 const port = process.env.PORT || 3000;
 app.listen(port, () =>{
 console.log(`Listening on port ${port}...`);
