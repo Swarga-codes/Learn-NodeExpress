@@ -1,8 +1,21 @@
 const Joi=require('joi');
 const express=require('express');
 const app=express();
+const logger=require('./logger');
+const auth = require('./auth');
+const helmet=require('helmet');
+const morgan=require('morgan');
 //using middleware
 app.use(express.json());
+//using custom middlewares
+app.use(logger);
+app.use(auth);
+//using built in middlewares
+app.use(express.urlencoded({extended:true})); // used for parsing req of forms that is of key=value&key=value
+//extended is used so that it can parse arrays or any other complex objects
+app.use(express.static("public")); //used to display static content or pages
+app.use(helmet()); // secures our app by including various HTTP headers
+app.use(morgan('tiny')); //gives details about the requests made
 const courses=[
     {id:1,name:"Machine Learning"},
     {id:2,name:"Data Science"},
