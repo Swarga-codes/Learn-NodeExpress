@@ -8,7 +8,7 @@ const morgan=require('morgan');
 const config=require('config');
 const courses=require('./routes/courses');
 const home=require('./routes/home');
-// const dot=require('dotenv').config({NODE_ENV:process.env.NODE_ENV});
+const dot=require('dotenv').config();
 const startupDebugger = require('debug')('app:startup');
 const dbDebugger = require('debug')('app:db');
 //setting view engine
@@ -35,6 +35,8 @@ if(app.get('env')==='development'){
 }
 console.log("Application name : "+config.get('name'));
 console.log("Mail Server : "+config.get('mail.host'));
+// console.log("App Password : "+config.get('mail.password'));
+
 // console.log("Password : "+config.get('mail.password'));
 
 
