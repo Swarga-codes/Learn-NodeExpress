@@ -27,7 +27,20 @@ console.log(result);
 // createCourse();
 //reading the data or querying the data
 async function getCourses(){
-    const courses=await Course.find({author:'Markus',isPublished:true})
+    // comparison query operators
+    //eq(equals)
+    //ne(not equals)
+    //gt(greater than)
+    //gte(greater than or equals to)
+    //lt(less than)
+    //lte(less than or equals to)
+    //in(within certain values)
+    //nin(not in)
+
+    const courses=await Course
+    // .find({author:'Markus',isPublished:true})
+    // .find({price:{$gt:10,$lt:20}})
+    // .find({price:{$in:[10,15,20]}})
     .limit(2)
     .sort({name:-1})
     .select({name:1,tags:1});
