@@ -102,4 +102,13 @@ async function updateCourses(id){
         );
         console.log(course);   
 }
-updateCourses('63fb4ba7cbf687440b20837f');
+async function deleteCourses(id){
+    //delete one course at a time
+    // const result=await Course.deleteOne({_id:id});
+    // const result=await Course.deleteMany({_id:id}); can be used to delete multiple courses
+    const course = await Course.findByIdAndRemove(id);
+
+    console.log(course);
+}
+// createCourse();
+deleteCourses('640396f70a104b17f1357ff3');
