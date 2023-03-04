@@ -27,6 +27,9 @@ console.log(result);
 // createCourse();
 //reading the data or querying the data
 async function getCourses(){
+    const pageNumber=2;
+    const pageSize=10;
+    //The above is used for pagination mostly it is implemented from the query strings in api
     // comparison query operators
     //eq(equals)
     //ne(not equals)
@@ -36,14 +39,34 @@ async function getCourses(){
     //lte(less than or equals to)
     //in(within certain values)
     //nin(not in)
-
+//logical query operators
+//and (similar to or)
+//or({name:'Mosh'},{isPublished:true})
+//Regular expressions
+// Starts with markus
+// .find({author:/^Markus/})
+//ends with markus
+    // .find({name:/Markus$/})
+    //has markus in between
+// .find({name:/.*Markus.*/})
+//doesnt check for case or we can say is case insensitive
+// .find({author:/^Markus/i})
     const courses=await Course
-    // .find({author:'Markus',isPublished:true})
     // .find({price:{$gt:10,$lt:20}})
     // .find({price:{$in:[10,15,20]}})
-    .limit(2)
+    // .find({author:'Markus',isPublished:true})
+    // .find()
+    // .or([{author:'Markus'}, {isPublished:true}])
+    // .and([{author:'Markus'},{isPublished:true}])
+    .find({author:/^Markus/i})
+    // .find({name:/Markus$/})
+// .find({name:/.*Markus.*/})
+    // .limit(2)
+    .skip((pageNumber-1)*pageSize)
+    .limit(pageSize)
     .sort({name:-1})
-    .select({name:1,tags:1});
+    .select({name:1,tags:1})
+    .count();
     console.log(courses);
 }
 getCourses();
